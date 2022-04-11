@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: ./scripts/install-mdbook.sh
 
-      - run: echo 'follow-web-links = ${{ matrix.follow-web-links }}' >> red-stack/doc/book.toml
+      - run: echo 'follow-web-links = ${{ matrix.follow-web-links }}' >> book.toml
       - run: mdbook build
 
       # Push the built book to `gh-pages` branch

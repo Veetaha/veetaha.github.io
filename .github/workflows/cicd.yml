@@ -2,7 +2,7 @@ name: cicd
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
 
 jobs:
@@ -31,34 +31,23 @@ jobs:
           - false
     steps:
       - uses: actions/checkout@v3
-      - run: >
-          curl
-          --retry 5
-          --retry-connrefused
-          --retry-delay 30
-          -L https://github.com/Michael-F-Bryan/mdbook-linkcheck/releases/download/v0.7.4/mdbook-linkcheck.v0.7.4.x86_64-unknown-linux-gnu.zip
-          --output ./mdbook-linkcheck.zip
-          && unzip -j mdbook-linkcheck.zip mdbook-linkcheck -d /usr/local/bin
-          && chmod +x /usr/local/bin/mdbook-linkcheck
+      - run: ./scripts/install-mdbook.sh
 
-      - run: >
-          curl
-          --retry 5
-          --retry-connrefused
-          --retry-delay 30
-          -L https://github.com/rust-lang/mdBook/releases/download/v0.4.3/mdbook-v0.4.3-x86_64-unknown-linux-gnu.tar.gz
-          | tar -C /usr/local/bin -xzf -
       - run: echo 'follow-web-links = ${{ matrix.follow-web-links }}' >> red-stack/doc/book.toml
       - run: mdbook build
 
-      - run: git worktree add gh-pages gh-pages
-      - run: git config user.name "Deploy from CI"
-      - run: git config user.email ""
-      - run: cd gh-pages
-      # Delete the ref to avoid keeping history.
-      - run: git update-ref -d refs/heads/gh-pages
-      - run: rm -rf *
-      - run: mv ../book/* .
-      - run: git add .
-      - run: git commit -m "Deploy $GITHUB_SHA to gh-pages"
-      - run: git push --force
+      # Push the built book to `gh-pages` branch
+      - if: ${{ !matrix.follow-web-links }}
+        run: |
+          git worktree add gh-pages gh-pages
+          git config user.name "Deploy from CI"
+          git config user.email ""
+          cd gh-pages
+
+          # Delete the ref to avoid keeping history.
+          git update-ref -d refs/heads/gh-pages
+          rm -rf *
+          mv ../book/* .
+          git add .
+          git commit -m "Deploy $GITHUB_SHA to gh-pages"
+          git push --force

@@ -1,0 +1,64 @@
+name: cicd
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  # Verify there are no stupid typos in the repository
+  typos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Typos check should be pinned to the very specific version
+      # to prevent sudden dictionary updates from making the CI fail
+      - uses: crate-ci/typos@v1.6.0
+
+  mdbook-build-and-deploy:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+
+    # Validating the links to external websites may fail due to rate limiting or
+    # sudden external resource outage, so we cannot rely on this check
+    continue-on-error: ${{ matrix.follow-web-links }}
+
+    strategy:
+      matrix:
+        follow-web-links:
+          - true
+          - false
+    steps:
+      - uses: actions/checkout@v3
+      - run: >
+          curl
+          --retry 5
+          --retry-connrefused
+          --retry-delay 30
+          -L https://github.com/Michael-F-Bryan/mdbook-linkcheck/releases/download/v0.7.4/mdbook-linkcheck.v0.7.4.x86_64-unknown-linux-gnu.zip
+          --output ./mdbook-linkcheck.zip
+          && unzip -j mdbook-linkcheck.zip mdbook-linkcheck -d /usr/local/bin
+          && chmod +x /usr/local/bin/mdbook-linkcheck
+
+      - run: >
+          curl
+          --retry 5
+          --retry-connrefused
+          --retry-delay 30
+          -L https://github.com/rust-lang/mdBook/releases/download/v0.4.3/mdbook-v0.4.3-x86_64-unknown-linux-gnu.tar.gz
+          | tar -C /usr/local/bin -xzf -
+      - run: echo 'follow-web-links = ${{ matrix.follow-web-links }}' >> red-stack/doc/book.toml
+      - run: mdbook build
+
+      - run: git worktree add gh-pages gh-pages
+      - run: git config user.name "Deploy from CI"
+      - run: git config user.email ""
+      - run: cd gh-pages
+      # Delete the ref to avoid keeping history.
+      - run: git update-ref -d refs/heads/gh-pages
+      - run: rm -rf *
+      - run: mv ../book/* .
+      - run: git add .
+      - run: git commit -m "Deploy $GITHUB_SHA to gh-pages"
+      - run: git push --force

@@ -31,6 +31,8 @@ jobs:
           - false
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
       - run: ./scripts/install-mdbook.sh
 
       - run: echo 'follow-web-links = ${{ matrix.follow-web-links }}' >> book.toml

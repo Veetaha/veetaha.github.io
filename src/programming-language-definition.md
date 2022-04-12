@@ -27,7 +27,7 @@ The main feature of programming language is that it is *formal*, which means tha
 
 Programming languages are mostly used to write applications running on different platforms (servers, PC, Laptops, mobile phones, etc.).
 
-We already know what programs are capable of (web browser, file browser, games, torrent, etc). We can make the computer do almost anything we want, but before we harness the full power we will begin with the basics. Knowing just he basics may make us feel like a child playing in a sandbox, but this groundwork is of the highest importance to building the ground in any language.
+We already know what programs are capable of (web browser, file browser, games, torrent, etc). We can make the computer do almost anything we want, but before we harness the full power we will begin with the basics. Knowing just the basics may make us feel like a child playing in a sandbox, but this groundwork is of the highest importance to building the ground in any language.
 
 ## General-Purpose Programming Language Structure
 

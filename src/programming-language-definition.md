@@ -75,7 +75,7 @@ println!(
              ;
 ```
 
-We may recall that formal languages were said to be 'Little redundant. This "little" is what still allows for exceptional trivial redundancy like this. However, it makes writing code easier and more flexible for humans. In some cases, extra whitespace makes our code prettier.
+We may recall that formal languages were said to be 'Little redundant'. This "little" is what still allows for exceptional trivial redundancy like this. However, it makes writing code easier and more flexible for humans. In some cases, extra whitespace makes our code prettier.
 
 For example when formatting a long list of things we would like to write it across several lines, disregarding the fact that it would make the text of the program longer.
 

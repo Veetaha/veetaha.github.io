@@ -1,6 +1,6 @@
 # Programming Language Definition
 
-Welcome! You are on a journey to find out what programming is, and how it is useful. You are probably eager to start with a code example. To satisfy your whim here is one written in [Rust language][rustlang]:
+Welcome! We are about to find out what programming languages are, and how they word. We are probably eager to start with a code example. To satisfy our whim here is one written in [Rust language][rustlang]:
 
 ```rust
 fn main() {
@@ -14,26 +14,26 @@ We are going to use Rust as our example programming language. However, there may
 
 ## Formal vs Natural Language
 
-What we've seen in the code example above is a *formal language* called Rust. You may wonder what the difference between a programming language and a human language like English is. That's a good question.
+What we've seen in the code example above is a *formal language* called Rust. We may wonder what the difference between a programming language and a human language like English is. That's a good question.
 
 First of all, we must understand that classic programming languages are text-based. I.e. all code that programmers write is just simple text, and all code editors are text editors as well.
 
 The main feature of programming language is that it is *formal*, which means that it is:
-- **Unambiguous** - each word of the language has a singular interpretation within the context where it is written. For example, the computer knows that `println!` instructs it to write to the console, and `"Hello world"` defines what should be printed. The rules of language's syntax, grammar, and semantics fully define what alphabet the language it uses, what punctuation, keywords, and other symbols are valid, and in what order. From this follows the next feature.
-- **Strict** - the language disallows having grammar mistakes (e.g. a misspelled word or wrong punctuation). If we have any mistakes in your code, we'll see errors when running our program.
-- **Little redundancy** - the language is very laconic. It doesn't have redundant constructions that are not necessary for understanding. For example, the word `fn` in the code snippet shown at the beginning stands for "function". The language designers decided to shorten it because it is a widely used keyword that we would like to spend less time typing. Other than that you wouldn't write `The fn main` in a programming language, because articles are usually considered to be a redundancy of a natural language, so we omit `a/an/the` in code to keep it succinct.
+- **Unambiguous** - each word of the language has a singular interpretation within the context where it is written. For example, the computer knows that `println!` instructs it to write to the console, and `"Hello world"` defines what should be printed. The rules of language's syntax, grammar, and semantics fully define what alphabet the language uses, what punctuation, keywords, and other symbols are valid, and in what order. From this follows the next feature.
+- **Strict** - the language disallows having grammar mistakes (e.g. a misspelled word or wrong punctuation). If we have any mistakes in our code, we'll see errors when running our program.
+- **Little redundancy** - the language is very laconic. It doesn't have redundant constructions that are not necessary for understanding. For example, the word `fn` in the code snippet shown at the beginning stands for "function". The language designers decided to shorten it because it is a widely used keyword that we would like to spend less time typing. Other than that we wouldn't write `The fn main` in a programming language, because articles are usually considered to be a redundancy of a natural language, so we omit `a/an/the` in code to keep it succinct.
 
 ## Purpose
 
 Programming languages are mostly used to write applications running on different platforms (servers, PC, Laptops, mobile phones, etc.). We are going to focus on desktop programs that run on Linux in this article.
 
-You already know what programs are capable of (web browser, file browser, games, torrent, etc). We can make the computer do almost anything we want as is our employee, but before we harness the full power we will begin with the basics. The basics may make you feel like a child playing in a sandbox, but this groundwork is of the highest importance to building the ground in any language.
+We already know what programs are capable of (web browser, file browser, games, torrent, etc). We can make the computer do almost anything we want as is our employee, but before we harness the full power we will begin with the basics. Knowing just he basics may make us feel like a child playing in a sandbox, but this groundwork is of the highest importance to building the ground in any language.
 
 ## General-Purpose Programming Language Structure
 
 ### Direction
 
-Classic programming languages are written in the usual direction just like natural languages. You should read them left-to-right and top-to-bottom. Regular programming languages like Rust, TypeScript, C/C++, C#, Java, Kotlin, Python, etc. share a similar structure.
+Classic programming languages are written in the usual direction just like natural languages. We should read them left-to-right and top-to-bottom. Regular programming languages like Rust, TypeScript, C/C++, C#, Java, Kotlin, Python, etc. share a similar structure.
 
 ### Comments
 
@@ -41,7 +41,7 @@ To address an elephant in the room we'll begin with what makes our code readable
 
 Different languages have different syntax for comments, but the most frequent syntax is to use `//` (Rust, C/C++, Java...) or `#` (Python, Ruby, YAML) symbol to denote the beginning of the comment.
 
-The comment doesn't have to start on a new line. Any occurrence of `//` or `#` denotes the beginning of your natural language prattle. Such a comment is called a single-line comment because it finishes only at the end of the line.
+The comment doesn't have to start on a new line. Any occurrence of `//` or `#` denotes the beginning of our natural language prattle. Such a comment is called a single-line comment because it finishes only at the end of the line.
 
 ```rust
 // Blah, bruh, this code is dope, just look at this =)
@@ -75,7 +75,7 @@ println!(
              ;
 ```
 
-You may recall that formal languages were said to be 'Little redundant. This "little" is what still allows for exceptional trivial redundancy like this. However, it makes writing code easier and more flexible for humans. In some cases, extra whitespace makes our code prettier.
+We may recall that formal languages were said to be 'Little redundant. This "little" is what still allows for exceptional trivial redundancy like this. However, it makes writing code easier and more flexible for humans. In some cases, extra whitespace makes our code prettier.
 
 For example when formatting a long list of things we would like to write it across several lines, disregarding the fact that it would make the text of the program longer.
 
@@ -135,7 +135,7 @@ The simplest expression is just a *literal* value
 true
 ```
 
-These values are the atoms of your LEGO. They are called **literals**.
+These values are the atoms of our LEGO. They are called **literals**.
 
 #### Mathematical expressions
 
@@ -171,7 +171,7 @@ Let's take another example
 (2 + 6) * 9 / 3 > 46 - 1
 ```
 
-You can see how mathematical expressions can grow in complexity without bounds. What's important is to understand how a computer gets the result of an expression. Our tree representation can scale to this arbitrarily complex math expression. The computer builds the following tree for it:
+We can see how mathematical expressions can grow in complexity without bounds. What's important is to understand how a computer gets the result of an expression. Our tree representation can scale to this arbitrarily complex math expression. The computer builds the following tree for it:
 
 ![][expr-l-1]
 
@@ -180,7 +180,7 @@ We've already seen how the computer copes with a simple `2 + 2`. Similarly, it e
 
 ![][expr-l-2]
 
-You can see that parentheses have a single parameter that they evaluate to directly. From a semantics standpoint, the parentheses operator is used only for grouping parts of the expression tree that have lower operator precedence to give them a higher one. The operator precedence should be known to us from the school (e.g. `*` goes before `+`). So we just replace the parenthesis operator with the value of its argument.
+We can see that parentheses have a single parameter that they evaluate to directly. From a semantics standpoint, the parentheses operator is used only for grouping parts of the expression tree that have lower operator precedence to give them a higher one. The operator precedence should be known to us from the school (e.g. `*` goes before `+`). So we just replace the parenthesis operator with the value of its argument.
 
 ![][expr-l-3]
 
@@ -197,7 +197,7 @@ Likewise, the operator `/` has fully-evaluated values of parameters and the resu
 
 ![][expr-l-6]
 
-Now you can see where it goes. Operator `*` has fully evaluated values of parameters and the result is substituted with `24`.
+Now we can see where it goes. Operator `*` has fully evaluated values of parameters and the result is substituted with `24`.
 
 ![][expr-l-7]
 
@@ -212,7 +212,7 @@ Now the result of the expression is substituted with the result of a logical com
 
 #### Arbitrary expressions
 
-As you can see computers work not only with numbers, they work with values of different types including strings, booleans, lists, dictionaries (maps), etc. All of them also have their representation on the expression tree.
+As we can see computers work not only with numbers, they work with values of different types including strings, booleans, lists, dictionaries (maps), etc. All of them also have their representation on the expression tree.
 
 For example, suppose we have a dictionary and we would like to get the value of the key `"blackjack"` from it.
 
@@ -287,7 +287,7 @@ while std::io::stdin().lines().next().is_some() {
 ```
 
 They aren't usually delimited by a semicolon, and they create irregular execution paths (conditional execution, loops).
-We can see how they are composed with regular statements. They usually delimit a block of code making the regular statements inside of them be written after a small whitespace gap (indentation). The more statements you embed in them, the more nested your code looks like:
+We can see how they are composed with regular statements. They usually delimit a block of code making the regular statements inside of them be written after a small whitespace gap (indentation). The more statements we embed in them, the more nested our code looks like:
 
 ```rust
 if 2 + 2 == 4 {
@@ -303,7 +303,7 @@ if 2 + 2 == 4 {
 
 ### Variables
 
-Variables are a little bit different in different programming languages. Here are examples of how you would create a variable in different programming languages:
+Variables are a little bit different in different programming languages. Here are examples of how we would create a variable in different programming languages:
 
 Rust uses the introducer keyword `let` to distinguish between variable declarations and reassignments.
 ```rust
@@ -326,16 +326,16 @@ Java uses an introduce type annotation for the variable
 ```java
 String variable = "Hello world";
 
-// With introducer syntax there is no chance you could make a typo
-// This will result in an error when building your application
+// With introducer syntax there is no chance we could make a typo
+// This will result in an error when building our application
 voriable = "Equestria";
 ```
 
-You can use variables in place of literal values. Their main purpose is to serve as storage for intermediate calculations as well as to reduce the repetition of literal values in a program.
+We can use variables in place of literal values. Their main purpose is to serve as storage for intermediate calculations as well as to reduce the repetition of literal values in a program.
 
 ## Conclusion
 
-These were the most common parts of any language. Once you understand how they work, you will be able to learn any classic programming language with ease, because they differ only in small syntactic peculiarities, which are trivial to study.
+These were the most common parts of any language. Once we understand how they work, we will be able to learn any classic programming language with ease, because they differ only in small syntactic peculiarities, which are trivial to study.
 
 
 ## References

@@ -322,12 +322,13 @@ voriable = "Equestria"
 print(variable)
 ```
 
-Java uses an introduce type annotation for the variable
+Java uses an introducer type annotation for the variable
 ```java
 String variable = "Hello world";
 
 // With introducer syntax there is no chance we could make a typo
-// This will result in an error when building our application
+// This will result in an error when building our application,
+// because such a variable wasn't previously declared
 voriable = "Equestria";
 ```
 

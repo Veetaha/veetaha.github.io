@@ -1,6 +1,6 @@
 # Programming Language Definition
 
-Welcome! We are about to find out what programming languages are, and how they word. We are probably eager to start with a code example. To satisfy our whim here is one written in [Rust language][rustlang]:
+Welcome! We are about to find out what programming languages are, and how they work. We are probably eager to start with a code example. To satisfy our whim here is one written in [Rust language][rustlang]:
 
 ```rust
 fn main() {

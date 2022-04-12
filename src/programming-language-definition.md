@@ -343,6 +343,9 @@ These were the most common parts of any language. Once we understand how they wo
 
 - [Формальні і природні мови](https://disted.edu.vn.ua/courses/learn/579)
 
+
+*2022-04-12*
+
 [rustlang]: https://www.rust-lang.org/
 
 [expr-l-9]: https://user-images.githubusercontent.com/36276403/162851733-9cdc5713-0e6c-4385-8793-165d748e4a9f.jpg

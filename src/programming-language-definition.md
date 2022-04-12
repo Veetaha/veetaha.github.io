@@ -83,7 +83,7 @@ For example when formatting a long list of things we would like to write it acro
 
 E.g. this code is hard to read because it is all on one line.
 ```rust
-let vocabulary = ["Programming", "Rust", "Language", "Niko", "Veetaha", "Dictionary", "List", "Array", "Blackjack", "Morning Glory", "Rampage", "P21", "Project", "Horizons", "Octavia", "Vynil", "Univeristy", "Days"];
+let vocabulary = ["Programming", "Rust", "Language", "Niko", "Veetaha", "Dictionary", "List", "Array", "Blackjack", "Morning Glory", "Rampage", "P21", "Project", "Horizons", "Octavia", "Vynil", "University", "Days"];
 ```
 
 This code is easier to read, even though it takes much more screen space, just because human's perception of smaller lines of text is better than the longer ones.
@@ -108,7 +108,7 @@ let vocabulary = [
   // We can even use whitespace to group related parts of code together visually
   "Octavia",
   "Vynil",
-  "Univeristy",
+  "University",
   "Days"
 ];
 ```

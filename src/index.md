@@ -1,4 +1,4 @@
-# Veetaha
+# [@Veetaha]
 
 Welcome! This is the place, where I share my knowledge with people, where 99% of that is programming with the domination of Rust language.
 

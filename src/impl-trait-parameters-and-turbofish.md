@@ -191,6 +191,6 @@ I hope you learned something new today 😉.
 
 ---
 
-[Link post on Reddit](https://www.reddit.com/r/rust/comments/w530jw/how_to_define_a_function_you_cant_invoke/)
+[Post on Reddit](https://www.reddit.com/r/rust/comments/w530jw/how_to_define_a_function_you_cant_invoke/)
 
 *2022-07-22*

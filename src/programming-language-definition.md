@@ -125,14 +125,17 @@ The simplest expression is just a *literal* value
 
 ```rust
 99
+# ;
 ```
 
 ```rust
 "Hello world"
+# ;
 ```
 
 ```rust
 true
+# ;
 ```
 
 These values are the atoms of our LEGO. They are called **literals**.
@@ -143,6 +146,7 @@ Mathematical expressions are the most widely-known kind of expressions:
 
 ```rust
 2 + 2
+# ;
 ```
 
 All expressions like LEGO pieces are composed of smaller LEGO pieces. And this relationship is best described with a tree.
@@ -169,6 +173,7 @@ Let's take another example
 
 ```rust
 (2 + 6) * 9 / 3 > 46 - 1
+# ;
 ```
 
 We can see how mathematical expressions can grow in complexity without bounds. What's important is to understand how a computer gets the result of an expression. Our tree representation can scale to this arbitrarily complex math expression. The computer builds the following tree for it:
@@ -216,7 +221,7 @@ As we can see computers work not only with numbers, they work with values of dif
 
 For example, suppose we have a dictionary and we would like to get the value of the key `"blackjack"` from it.
 
-```rust
+```rust,ignore
 dict["blackjack"]
 ```
 
@@ -226,7 +231,7 @@ The expression tree for this would be
 
 If we want to call a function `print` that would output the value of the dictionary we would do it this way:
 
-```rust
+```rust,ignore
 print(dict["blackjack"])
 ```
 

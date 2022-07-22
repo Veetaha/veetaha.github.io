@@ -209,7 +209,7 @@ Because this function uses `impl Trait` syntax it's impossible to call it with t
 # use std::io::Error;
 // Can't use turbofish to specify that the first type param is `Result<Vec<_>>`
 map_collect([false, true], |val| Ok::<bool, Error>(val))?;
-//                                                               ^ cannot infer type
+//                                                      ^ cannot infer type
 # Ok::<(), Error>(())
 ```
 

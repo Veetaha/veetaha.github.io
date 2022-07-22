@@ -12,7 +12,7 @@ I owe a lot of my knowledge to these people:
 * [@matklad], who ultimately helped me become the developer I am today by reviewing my code in their open source project [rust-analyzer];
 * [@anelson], who hired me for a startup project and shared invaluable experience of making a commercial product with a team.
 
-You guys are as passionate and as awesome as you can be, thank you so much for investing in me 😋!
+You guys are as passionate and as awesome as possible, thank you so much for investing in me 😋!
 
 [@anelson]: https://github.com/anelson
 [@DevInCube]: https://github.com/DevInCube

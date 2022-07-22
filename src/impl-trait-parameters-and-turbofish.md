@@ -213,7 +213,7 @@ map_collect([false, true], |val| Ok::<bool, Error>(val))?;
 # Ok::<(), Error>(())
 ```
 
-If we add replace `impl FnMut(T::Item) -> T` with the fourth generic parameter we will be able to use turbofish for calling the function, but it will be as ugly as this:
+If we replace `impl FnMut(T::Item) -> T` with the fourth generic parameter we will be able to use turbofish for calling the function, but it will be as ugly as this:
 ```rust
 # fn map_collect<O: FromIterator<T>, I: IntoIterator, T, F: FnMut(I::Item) -> T>(
 #     iter: I,

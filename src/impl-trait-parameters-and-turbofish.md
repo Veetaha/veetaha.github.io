@@ -183,6 +183,49 @@ Even if all remaining generic parameters can be trivially inferred we have to en
 
 There exists [an initiative](https://rust-lang.github.io/impl-trait-initiative/explainer/apit_turbofish.html) to fix this by letting us use turbofish syntax with `impl Trait` parameters being inferred, though I guess it has low priority at the time of this writing 🤔.
 
+
+### Real World Example
+
+Such a problem occurred for me, when writing an extension trait, but I will depict it as a free function here for simplicity. This function maps one collection into the other.
+
+```rust
+fn map_collect<O: FromIterator<T>, I: IntoIterator, T>(
+    iter: I,
+    map: impl FnMut(I::Item) -> T
+) -> O {
+    iter.into_iter().map(map).collect()
+}
+```
+
+Because this function uses `impl Trait` syntax it's impossible to call it with turbofish. For example, we can't instruct `rustc` to infer `Result<Vec<_>>` for `O` type parameter that easily.
+
+```rust,compile_fail
+# fn map_collect<O: FromIterator<T>, I: IntoIterator, T>(
+#     iter: I,
+#     map: impl FnMut(I::Item) -> T
+# ) -> O {
+#     iter.into_iter().map(map).collect()
+# }
+# use std::io::Error;
+// Can't use turbofish to specify that `O` is `Result<Vec<_>>`
+map_collect([false, true], |val| Ok::<bool, Error>(val))?;
+//                                                               ^ cannot infer type
+# Ok::<(), Error>(())
+```
+
+If we add replace `impl FnMut(T::Item) -> T` with the fourth generic parameter we will be able to use turbofish for calling the function, but it will be as ugly as this:
+```rust
+# fn map_collect<O: FromIterator<T>, I: IntoIterator, T, F: FnMut(I::Item) -> T>(
+#     iter: I,
+#     map: F
+# ) -> O {
+#     iter.into_iter().map(map).collect()
+# }
+# use std::io::Error;
+map_collect::<Result<Vec<_>, Error>, _, _, _>([false, true], |val| Ok(val))?;
+# Ok::<(), Error>(())
+```
+
 # Conclusions
 
 Now you know what the limitations of `impl Trait` are, and how to define a function, that is impossible to call in Rust without [uninhabited types](https://smallcultfollowing.com/babysteps/blog/2018/08/13/never-patterns-exhaustive-matching-and-uninhabited-types-oh-my/).

@@ -197,7 +197,7 @@ fn map_collect<O: FromIterator<T>, I: IntoIterator, T>(
 }
 ```
 
-Because this function uses `impl Trait` syntax it's impossible to call it with turbofish. For example, we can't instruct `rustc` to infer `Result<Vec<_>>` for `O` type parameter that easily.
+Because this function uses `impl Trait` syntax it's impossible to call it with turbofish. For example, we can't instruct `rustc` to infer `Result<Vec<_>>` for the first type parameter that easily.
 
 ```rust,compile_fail
 # fn map_collect<O: FromIterator<T>, I: IntoIterator, T>(
@@ -207,7 +207,7 @@ Because this function uses `impl Trait` syntax it's impossible to call it with t
 #     iter.into_iter().map(map).collect()
 # }
 # use std::io::Error;
-// Can't use turbofish to specify that `O` is `Result<Vec<_>>`
+// Can't use turbofish to specify that the first type param is `Result<Vec<_>>`
 map_collect([false, true], |val| Ok::<bool, Error>(val))?;
 //                                                               ^ cannot infer type
 # Ok::<(), Error>(())

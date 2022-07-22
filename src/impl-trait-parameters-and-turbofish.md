@@ -4,6 +4,8 @@
 
 We will overview the desugaring of `impl Trait`, how turbofish syntax works and the limitation of using them both together.
 
+If you want to skip to the limitation itself
+
 > ❗This post covers only `impl Trait` in function parameters position.
 >
 > `impl Trait` in function return types is a totally different concept, that has almost nothing to do with what's in this article.
@@ -186,5 +188,9 @@ There exists [an initiative](https://rust-lang.github.io/impl-trait-initiative/e
 Now you know what the limitations of `impl Trait` are, and how to define a function, that is impossible to call in Rust without [uninhabited types](https://smallcultfollowing.com/babysteps/blog/2018/08/13/never-patterns-exhaustive-matching-and-uninhabited-types-oh-my/).
 
 I hope you learned something new today 😉.
+
+---
+
+[Link post on Reddit](https://www.reddit.com/r/rust/comments/w530jw/how_to_define_a_function_you_cant_invoke/)
 
 *2022-07-22*

@@ -114,7 +114,7 @@ Baz::C::<bool, u32>(false);
 
 This is because when using an explicit turbofish syntax **all** required type parameters must be explicitly specified and the optional ones will be set to their default values. Even, if we want to specify only the required type parameters, but infer the rest, we have to use a wildcard `_` to do that.
 
-The same is true even if part of required type parameters can be inferred. For instance, we can't use this syntax to have the value type of the `HashMap` inferred.
+The same is true even if part of the required type parameters can be inferred. For instance, we can't use this syntax to have the value type of the `HashMap` inferred.
 
 ```rust,compile_fail
 # use std::collections::HashMap;
@@ -186,7 +186,7 @@ There exists [an initiative](https://rust-lang.github.io/impl-trait-initiative/e
 
 ### Real World Example
 
-Such a problem occurred for me, when writing an extension trait, but I will depict it as a free function here for simplicity. This function maps one collection into the other.
+Such a problem occurred for me when writing an extension trait, but I will depict it as a free function here for simplicity. This function maps one collection into the other.
 
 ```rust
 fn map_collect<O: FromIterator<T>, I: IntoIterator, T>(

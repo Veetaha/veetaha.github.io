@@ -4,7 +4,7 @@
 
 We will overview the desugaring of `impl Trait`, how turbofish syntax works and the limitation of using them both together.
 
-If you want to skip to the limitation itself
+If you want to skip to the limitation itself, then go to ["Turbofish Limitation Aftermath"](#turbofish-limitation-aftermath).
 
 > ❗This post covers only `impl Trait` in function parameters position.
 >

@@ -1,0 +1,521 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Programming Language Definition - Veetaha Website</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Index</a></li><li class="chapter-item expanded "><a href="programming-language-definition.html" class="active"><strong aria-hidden="true">1.</strong> Programming Language Definition</a></li><li class="chapter-item expanded "><a href="impl-trait-parameters-and-turbofish.html"><strong aria-hidden="true">2.</strong> Impl Trait Parameters And Turbofish</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Veetaha Website</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#programming-language-definition" id="programming-language-definition">Programming Language Definition</a></h1>
+<p>Welcome! We are about to find out what programming languages are, and how they work. We are probably eager to start with a code example. To satisfy our whim here is one written in <a href="https://www.rust-lang.org/">Rust language</a>:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+  println!(&quot;Hello world&quot;);
+}
+</code></pre></pre>
+<p>It is a classic program that prints the words &quot;Hello world&quot; to the terminal window.</p>
+<p>We are going to use Rust as our example programming language. However, there may be references and examples written in other languages further.</p>
+<h2><a class="header" href="#formal-vs-natural-language" id="formal-vs-natural-language">Formal vs Natural Language</a></h2>
+<p>What we've seen in the code example above is a <em>formal language</em> called Rust. We may wonder what the difference between a programming language and a human language like English is. That's a good question.</p>
+<p>First of all, we must understand that classic programming languages are text-based. I.e. all code that programmers write is just simple text, and all code editors are text editors as well.</p>
+<p>The main feature of programming language is that it is <em>formal</em>, which means that it is:</p>
+<ul>
+<li><strong>Unambiguous</strong> - each word of the language has a singular interpretation within the context where it is written. For example, the computer knows that <code>println!</code> instructs it to write to the console, and <code>&quot;Hello world&quot;</code> defines what should be printed. The rules of language's syntax, grammar, and semantics fully define what alphabet the language uses, what punctuation, keywords, and other symbols are valid, and in what order. From this follows the next feature.</li>
+<li><strong>Strict</strong> - the language disallows having grammar mistakes (e.g. a misspelled word or wrong punctuation). If we have any mistakes in our code, we'll see errors when running our program.</li>
+<li><strong>Little redundancy</strong> - the language is very laconic. It doesn't have redundant constructions that are not necessary for understanding. For example, the word <code>fn</code> in the code snippet shown at the beginning stands for &quot;function&quot;. The language designers decided to shorten it because it is a widely used keyword that we would like to spend less time typing. Other than that we wouldn't write <code>The fn main</code> in a programming language, because articles are usually considered to be a redundancy of a natural language, so we omit <code>a/an/the</code> in code to keep it succinct.</li>
+</ul>
+<h2><a class="header" href="#purpose" id="purpose">Purpose</a></h2>
+<p>Programming languages are mostly used to write applications running on different platforms (servers, PC, Laptops, mobile phones, etc.).</p>
+<p>We already know what programs are capable of (web browser, file browser, games, torrent, etc). We can make the computer do almost anything we want, but before we harness the full power we will begin with the basics. Knowing just the basics may make us feel like a child playing in a sandbox, but this groundwork is of the highest importance to building the ground in any language.</p>
+<h2><a class="header" href="#general-purpose-programming-language-structure" id="general-purpose-programming-language-structure">General-Purpose Programming Language Structure</a></h2>
+<h3><a class="header" href="#direction" id="direction">Direction</a></h3>
+<p>Classic programming languages are written in the usual direction just like natural languages. We should read them left-to-right and top-to-bottom. Regular programming languages like Rust, TypeScript, C/C++, C#, Java, Kotlin, Python, etc. share a similar structure.</p>
+<h3><a class="header" href="#comments" id="comments">Comments</a></h3>
+<p>To address an elephant in the room we'll begin with what makes our code readable by letting programmers insert snippets of their natural language (99% of the time the conventional language is English) that explain what happens in the formal language around them. They are called comments, and they are completely ignored by a computer when it runs a program.</p>
+<p>Different languages have different syntax for comments, but the most frequent syntax is to use <code>//</code> (Rust, C/C++, Java...) or <code>#</code> (Python, Ruby, YAML) symbol to denote the beginning of the comment.</p>
+<p>The comment doesn't have to start on a new line. Any occurrence of <code>//</code> or <code>#</code> denotes the beginning of our natural language prattle. Such a comment is called a single-line comment because it finishes only at the end of the line.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Blah, bruh, this code is dope, just look at this =)
+println!(&quot;Hello world&quot;);
+
+println!(&quot;Twigly&quot;); // Comments can also be written after real code
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#whitespace" id="whitespace">Whitespace</a></h3>
+<p>Most of the languages ignore redundant whitespace. For example, the following 4 programs written in Rust are completely identical in what they do.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>println!(&quot;Hello World&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>println!( &quot;Hello world&quot;    );
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>println!( &quot;Hello world&quot;    )
+;
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>println!(
+
+      &quot;Hello world&quot;
+
+                            )
+
+             ;
+<span class="boring">}
+</span></code></pre></pre>
+<p>We may recall that formal languages were said to be 'Little redundant'. This &quot;little&quot; is what still allows for exceptional trivial redundancy like this. However, it makes writing code easier and more flexible for humans. In some cases, extra whitespace makes our code prettier.</p>
+<p>For example when formatting a long list of things we would like to write it across several lines, disregarding the fact that it would make the text of the program longer.</p>
+<blockquote>
+<p>Good programmers strive to write their code in a way that it would be easier to read and understand by other people!</p>
+</blockquote>
+<p>E.g. this code is hard to read because it is all on one line.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let vocabulary = [&quot;Programming&quot;, &quot;Rust&quot;, &quot;Language&quot;, &quot;Niko&quot;, &quot;Veetaha&quot;, &quot;Dictionary&quot;, &quot;List&quot;, &quot;Array&quot;, &quot;Blackjack&quot;, &quot;Morning Glory&quot;, &quot;Rampage&quot;, &quot;P21&quot;, &quot;Project&quot;, &quot;Horizons&quot;, &quot;Octavia&quot;, &quot;Vynil&quot;, &quot;University&quot;, &quot;Days&quot;];
+<span class="boring">}
+</span></code></pre></pre>
+<p>This code is easier to read, even though it takes much more screen space, just because human's perception of smaller lines of text is better than the longer ones.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let vocabulary = [
+  &quot;Programming&quot;,
+  &quot;Rust&quot;,
+  &quot;Language&quot;,
+  &quot;Niko&quot;,
+  &quot;Veetaha&quot;,
+  &quot;Dictionary&quot;,
+  &quot;List&quot;,
+  &quot;Array&quot;,
+  // When code is written vertically it's easier to add comments to it
+  &quot;Blackjack&quot;,
+  &quot;Morning Glory&quot;,
+  &quot;Rampage&quot;,
+  &quot;P21&quot;,
+  &quot;Project&quot;,
+  &quot;Horizons&quot;,
+
+  // We can even use whitespace to group related parts of code together visually
+  &quot;Octavia&quot;,
+  &quot;Vynil&quot;,
+  &quot;University&quot;,
+  &quot;Days&quot;
+];
+<span class="boring">}
+</span></code></pre></pre>
+<p>Languages like Python or Ruby give programmers less freedom in how they can use whitespace. However, this way they reduce the number of punctuation symbols in their language (e.g. <code>;</code>).</p>
+<h3><a class="header" href="#expressions" id="expressions">Expressions</a></h3>
+<p>Expressions are parts of the code that evaluate to some value. They are highly composite, and it is very important to understand how expressions compose into an expression tree and how the computer computes them.</p>
+<h4><a class="header" href="#literals" id="literals">Literals</a></h4>
+<p>The simplest expression is just a <em>literal</em> value</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>99
+<span class="boring">;
+</span><span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>&quot;Hello world&quot;
+<span class="boring">;
+</span><span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>true
+<span class="boring">;
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>These values are the atoms of our LEGO. They are called <strong>literals</strong>.</p>
+<h4><a class="header" href="#mathematical-expressions" id="mathematical-expressions">Mathematical expressions</a></h4>
+<p>Mathematical expressions are the most widely-known kind of expressions:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>2 + 2
+<span class="boring">;
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>All expressions like LEGO pieces are composed of smaller LEGO pieces. And this relationship is best described with a tree.</p>
+<p>For instance, a computer will build the following expression tree for a simple <code>2 + 2</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851904-e65e6952-94fb-40fc-94f2-dd5372045fed.jpg" alt="" /></p>
+<p>The tree is then evaluated from the bottom to the top. Mathematical operators always sit in the middle of the tree and literal values are always at the bottom.</p>
+<p>To compute the result of this tree the computer will begin from the bottom and look at the left <code>2</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851349-6654bd2d-dc57-4f69-a6f0-2a889fc2be44.jpg" alt="" /></p>
+<p>Since that value is already known (it is <em>literally</em> <code>2</code> duh...). The computer will look at the right branch of the tree, which is also <code>2</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851348-7fa08aef-4d38-47a6-b76d-617f9c652561.jpg" alt="" /></p>
+<p>Then it will conclude that the parameters of the plus (<code>+</code>) operator are known, so it can proceed with getting the sum of them, outputting <code>4</code> at the end.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851347-153be3fb-e598-467f-b5bc-959859b2ea56.jpg" alt="" /></p>
+<p>Let's take another example</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>(2 + 6) * 9 / 3 &gt; 46
+<span class="boring">;
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>We can see how mathematical expressions can grow in complexity without bounds. What's important is to understand how a computer gets the result of an expression. Our tree representation can scale to this arbitrarily complex math expression. The computer builds the following tree for it:</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851346-91a5e2a8-df04-443f-956d-ee77d5e24f55.jpg" alt="" /></p>
+<p>We've already seen how the computer copes with a simple <code>2 + 2</code>. Similarly, it evaluates <code>2 + 6</code> here to <code>8</code>:</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851342-e1d8ff5d-d973-4695-8940-dc5f576acf6a.jpg" alt="" /></p>
+<p>We can see that parentheses have a single parameter that they evaluate to directly. From a semantics standpoint, the parentheses operator is used only for grouping parts of the expression tree that have lower operator precedence to give them a higher one. The operator precedence should be known to us from the school (e.g. <code>*</code> goes before <code>+</code>). So we just replace the parenthesis operator with the value of its argument.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851361-a8d0cfc0-4767-4abd-b42d-757f7539708d.jpg" alt="" /></p>
+<p>Then the computer tries to evaluate the right branch of multiplication (<code>*</code>), but since that branch is also a nested expression, it follows to evaluate that from the bottom too begging with the literal value <code>9</code> that is already known.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851359-295160f4-1465-4436-a545-3689edd7f803.jpg" alt="" /></p>
+<p>Then it continues with the right branch of that subexpression and experiences the literal value <code>3</code> that is also known.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851593-7216e9e9-3511-426d-a103-ca96a00c2616.jpg" alt="" /></p>
+<p>Likewise, the operator <code>/</code> has fully-evaluated values of parameters and the result is substituted with <code>3</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851597-eeabdde1-e366-476c-a7c6-acf59d7b7410.jpg" alt="" /></p>
+<p>Now we can see where it goes. Operator <code>*</code> has fully evaluated values of parameters and the result is substituted with <code>24</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851599-f056d9e5-6cff-4fcb-8910-8fa1b8fcd82f.jpg" alt="" /></p>
+<p>But we are not done yet! The computer must evaluate the right branch of the expression tree. We as humans see that the value is already <code>46</code>, but the computer doesn't have eyesight, so it reads whatever is in the right branch to confirm that.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851605-f6035cda-258f-4b93-a283-e81ccf314952.jpg" alt="" /></p>
+<p>Now the result of the expression is substituted with the result of a logical comparison operation. <code>24</code> is not greater than (<code>&gt;</code>) <code>46</code>, so <code>false</code> is returned.</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162851733-9cdc5713-0e6c-4385-8793-165d748e4a9f.jpg" alt="" /></p>
+<h4><a class="header" href="#arbitrary-expressions" id="arbitrary-expressions">Arbitrary expressions</a></h4>
+<p>As we can see computers work not only with numbers, they work with values of different types including strings, booleans, lists, dictionaries (maps), etc. All of them also have their representation on the expression tree.</p>
+<p>For example, suppose we have a dictionary and we would like to get the value of the key <code>&quot;blackjack&quot;</code> from it.</p>
+<pre><code class="language-rust ignore">dict[&quot;blackjack&quot;]
+</code></pre>
+<p>The expression tree for this would be</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162853769-64176e02-9633-45ac-98a4-aab7936d4cc3.jpg" alt="" /></p>
+<p>If we want to call a function <code>print</code> that would output the value of the dictionary we would do it this way:</p>
+<pre><code class="language-rust ignore">print(dict[&quot;blackjack&quot;])
+</code></pre>
+<p>resulting in the following expression tree:</p>
+<p><img src="https://user-images.githubusercontent.com/36276403/162854376-76ca0ba2-ddc7-4d45-ba8b-4b873ebadaba.jpg" alt="" /></p>
+<h3><a class="header" href="#statements" id="statements">Statements</a></h3>
+<p>Statements are the next level of LEGO. They consist of expressions.</p>
+<p>A statement usually occupies a single line, but it can span multiple lines (except for Python-like languages where they are single-line), and it is delimited with a semicolon (<code>;</code>).</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let blackjack = 42;
+
+println!(&quot;Hello world&quot;);
+
+std::process::exit(0);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Statements usually represent the execution of a single command. They are similar to sentences in natural languages.
+For example, if we translate the code written in Rust language above to English we would get:</p>
+<pre><code class="language-md">Initialize a variable called blackjack with the integer value 42.
+
+Output the string &quot;Hello world&quot; to the terminal.
+
+Shut down the application with the status code of zero.
+</code></pre>
+<p>One difference, as well as the similarity, is that statements have a semicolon at the end, but sentences in English finish with a dot (<code>.</code>) or a question mark (<code>?</code>) or an exclamation point (<code>!</code>).</p>
+<h3><a class="header" href="#special-kinds-of-statements" id="special-kinds-of-statements">Special Kinds of Statements</a></h3>
+<p>A semicolon-delimited statement is the most frequent kind of statement we will see in any code. There exist also special kinds of statements that build on top of the regular statement allowing us to compose our program like a LEGO figurine.</p>
+<p>There are a bunch of them that can be found in many programming languages:</p>
+<ul>
+<li>Conditional statement (e.g. <code>if</code> statement)</li>
+<li>Loop statement (e.g. <code>while/for</code> statement)</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if 2 + 2 == 4 {
+  println!(&quot;Yes that's true!&quot;);
+}
+
+for counter in 0..5 {
+  println!(&quot;Counter value: {counter}&quot;);
+}
+
+while std::io::stdin().lines().next().is_some() {
+  println!(&quot;You've input a line!&quot;);
+  println!(&quot;Reading your next input...&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>They aren't usually delimited by a semicolon, and they create irregular execution paths (conditional execution, loops).
+We can see how they are composed with regular statements. They usually delimit a block of code making the regular statements inside of them be written after a small whitespace gap (indentation). The more statements we embed in them, the more nested our code looks like:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if 2 + 2 == 4 {
+  if 4 + 4 == 8 {
+    if 2 * 2 == 4 {
+      println!(&quot;All checks passed!&quot;);
+    } else {
+      println!(&quot;Last check didn't pass...&quot;);
+    }
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#variables" id="variables">Variables</a></h3>
+<p>Variables are a little bit different in different programming languages. Here are examples of how we would create a variable in different programming languages:</p>
+<p>Rust uses the introducer keyword <code>let</code> to distinguish between variable declarations and reassignments.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let variable = &quot;Hello world&quot;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Python doesn't use an introducer keyword. This however increases the chance that a programmer creates a variable with a new name instead of reassigning it to the existing variable if they make a typo in the variable name.</p>
+<pre><code class="language-python">variable = &quot;Hello world&quot;;
+
+# for example suppose we want to reassign to `variable`
+# but we make a typo here `voriable`
+voriable = &quot;Equestria&quot;
+
+# This program doesn't work as expected...
+print(variable)
+</code></pre>
+<p>Java uses an introducer type annotation for the variable</p>
+<pre><code class="language-java">String variable = &quot;Hello world&quot;;
+
+// With introducer syntax there is no chance we could make a typo
+// This will result in an error when building our application,
+// because such a variable wasn't previously declared
+voriable = &quot;Equestria&quot;;
+</code></pre>
+<p>We can use variables in place of literal values. Their main purpose is to serve as storage for intermediate calculations as well as to reduce the repetition of literal values in a program.</p>
+<h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
+<p>These were the most common parts of any language. Once we understand how they work, we will be able to learn any classic programming language with ease, because they differ only in small syntactic peculiarities, which are trivial to study.</p>
+<h2><a class="header" href="#references" id="references">References</a></h2>
+<ul>
+<li><a href="https://disted.edu.vn.ua/courses/learn/579">Формальні і природні мови</a></li>
+</ul>
+<p><em>2022-04-12</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="impl-trait-parameters-and-turbofish.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="impl-trait-parameters-and-turbofish.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

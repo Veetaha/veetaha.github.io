@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Impl Trait Parameters And Turbofish - Veetaha Website</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Index</a></li><li class="chapter-item expanded "><a href="programming-language-definition.html"><strong aria-hidden="true">1.</strong> Programming Language Definition</a></li><li class="chapter-item expanded "><a href="impl-trait-parameters-and-turbofish.html" class="active"><strong aria-hidden="true">2.</strong> Impl Trait Parameters And Turbofish</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Veetaha Website</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#impl-trait-parameters-and-turbofish" id="impl-trait-parameters-and-turbofish">Impl Trait Parameters And Turbofish</a></h1>
+<h2><a class="header" href="#agenda" id="agenda">Agenda</a></h2>
+<p>We will overview the desugaring of <code>impl Trait</code>, how turbofish syntax works and the limitation of using them both together.</p>
+<p>If you want to skip to the limitation itself, then go to <a href="#turbofish-limitation-aftermath">&quot;Turbofish Limitation Aftermath&quot;</a>.</p>
+<blockquote>
+<p>❗This post covers only <code>impl Trait</code> in function parameters position.</p>
+<p><code>impl Trait</code> in function return types is a totally different concept, that has almost nothing to do with what's in this article.</p>
+</blockquote>
+<h2><a class="header" href="#impl-trait-desugaring" id="impl-trait-desugaring">Impl Trait Desugaring</a></h2>
+<p>Rust allows you to have a shortcut for defining a function with generic parameters bounded by trait and lifetimes expression.</p>
+<p>Here is an example of <code>impl Trait</code> usage in function parameter types:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">trait Trait1 {} trait Trait2 {}
+</span><span class="boring">
+</span>fn foo&lt;T&gt;(
+    a: impl Trait1,
+    b: T,
+    c: impl Trait1 + Trait2 + 'static,
+    d: impl Trait1,
+) {
+    /**/
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Under the hood this <em>probably</em> desugars into the following code:</p>
+<blockquote>
+<p>The word <em>probably</em> here denotes that it is not the exact desugaring that <code>rustc</code> does, which is it's private implementation detail.</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">trait Trait1 {} trait Trait2 {}
+</span><span class="boring">
+</span>fn foo&lt;
+    T,
+    __T1: Trait1,
+    __T2: Trait1 + Trait2 + 'static,
+    __T3: Trait1
+&gt;(
+    a: __T1,
+    b: T,
+    c: __T2,
+    d: __T3,
+)
+{
+    /**/
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here we have a regular generic parameter <code>T</code>, and three more generic parameters generated for us by <code>impl Trait</code> syntax automatically (<code>__T1</code>, <code>__T2</code>, <code>__T3</code>).</p>
+<p>Even if the function uses the same <code>impl Trait</code> in several function parameters, they still generate different generic parameter types. That's why even though <code>a</code> and <code>d</code> have <code>impl Trait1</code> type annotation, they still use different <code>__T1</code> and <code>__T3</code> generic parameters in their desugaring shown above.</p>
+<p>The symbols <code>__T1</code>, <code>__T2</code>, <code>__T3</code> are not available in Rust code, therefore there will be limitations when working with them described in the following paragraphs.</p>
+<h2><a class="header" href="#type-inference-and-turbofish-syntax" id="type-inference-and-turbofish-syntax">Type Inference And Turbofish Syntax</a></h2>
+<p>Let's recap what turbofish (<code>::&lt;&gt;</code>) syntax provides to us.
+Take an example generic function.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bar&lt;T, U&gt;(a: T, b: U) { /**/ }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Suppose we want to provide it with <code>T = bool</code> and <code>U = i32</code>. We can do this in various ways.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">fn bar&lt;T, U&gt;(a: T, b: U) { /**/ }
+</span>bar             (false, 99); // infer all generic params
+bar::&lt;bool, i32&gt;(false, 99); // specify all generic params explicitly with turbofish
+bar::&lt;_, _&gt;     (false, 99); // infer 2 generic params
+bar::&lt;_, i32&gt;   (false, 99); // infer the first param, but specify the second
+bar::&lt;bool, _&gt;  (false, 99); // specify the first param, but infer the second
+<span class="boring">}
+</span></code></pre></pre>
+<p>Generic parameters in type definitions and type aliases can use default values. It is not possible to set default values for functions though!</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Baz&lt;A, B, C = u32&gt; {
+    A(A),
+    B(B),
+    C(C),
+}
+
+// Now we can create the value of the enum as such:
+
+Baz::A::&lt;_, ()&gt;       (false); // (1) Baz&lt;bool, (), u32&gt;
+Baz::B::&lt;String, _&gt;   (false); // (2) Baz&lt;String, bool, u32&gt;
+Baz::C::&lt;bool, u32, _&gt;(false); // (3) Baz&lt;bool, u32, bool&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>By omitting the third argument in the turbofish syntax in cases (1) and (2) we opted in to using the default <code>u32</code> type for the generic parameter <code>C</code>.</p>
+<p>When the third generic parameter is overridden, even with a wildcard (<code>_</code>), it means that the default value is ignored. The wildcard merely specifies that the generic type parameter has to be inferred from usage.</p>
+<p>It means, that the following will produce a compile error.</p>
+<pre><pre class="playground"><code class="language-rust compile_fail">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">enum Baz&lt;A, B, C = u32&gt; {
+</span><span class="boring">    A(A),
+</span><span class="boring">    B(B),
+</span><span class="boring">    C(C),
+</span><span class="boring">}
+</span><span class="boring">
+</span>Baz::C::&lt;bool, u32&gt;(false);
+//                  ^^^^^ expected `u32`, found `bool`
+<span class="boring">}
+</span></code></pre></pre>
+<p>This is because when using an explicit turbofish syntax <strong>all</strong> required type parameters must be explicitly specified and the optional ones will be set to their default values. Even, if we want to specify only the required type parameters, but infer the rest, we have to use a wildcard <code>_</code> to do that.</p>
+<p>The same is true even if part of the required type parameters can be inferred. For instance, we can't use this syntax to have the value type of the <code>HashMap</code> inferred.</p>
+<pre><pre class="playground"><code class="language-rust compile_fail">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use std::collections::HashMap;
+</span><span class="boring">
+</span>let map = HashMap::&lt;String&gt;::from_iter([
+//     |           ^^^^^^^   ------ supplied 1 generic argument
+//     |           |
+//     |           expected at least 2 generic arguments
+    (&quot;key&quot;.to_owned(), true)
+]);
+<span class="boring">}
+</span></code></pre></pre>
+<p>We are forced to enumerate all remaining deduced generic parameters with <code>_</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use std::collections::HashMap;
+</span><span class="boring">
+</span>let map = HashMap::&lt;String, _&gt;::from_iter([(&quot;key&quot;.to_owned(), true)]);
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#turbofish-limitation-aftermath" id="turbofish-limitation-aftermath">Turbofish Limitation Aftermath</a></h2>
+<p>Based on the knowledge of what <code>impl Trait</code> desugars to and how turbofish works, it should be obvious, that <code>impl Trait</code> in function parameter type annotations disables the turbofish (<code>::&lt;&gt;</code>) call syntax, and requires the generic parameters to be inferred. There is simply no way to specify the values for implicit generic parameters (denoted in previous paragraphs as <code>__T1</code>, <code>__T2</code>, etc.).</p>
+<pre><code class="language-rust ignore"><span class="boring">trait Trait1 {}
+</span>fn blackjack&lt;T&gt;(a: impl Trait1, b: T, c: impl Trait1) { /**/ }
+
+blackjack::&lt;bool, /* now way to pass two params for impl trait 🤔*/&gt;(/*...*/);
+</code></pre>
+<p>The way how the compiler generates implicit generic parameters for each <code>impl Trait</code> occurrence is its private implementation detail. It guarantees neither the order nor the position of implicit generic parameters generated from <code>impl Trait</code>, so we can't explicitly specify the value for these parameters.</p>
+<p>The only way for <code>rustc</code> to know what types for each <code>impl Trait</code> to use, is via type inference only. This also means we can't specify the value for regular generic parameters other than by letting them be deduced.</p>
+<p>For example, it is impossible to call the following function at all.</p>
+<pre><pre class="playground"><code class="language-rust compile_fail">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">trait Trait1 {}
+</span><span class="boring">impl Trait for i32 {}
+</span>fn voldemort&lt;T: Default&gt;(a: impl Trait1) {
+    T::default();
+}
+
+// No syntax exists to call `voldemort` 😣
+
+voldemort::&lt;bool&gt;(99); // (compile error) can't use turbofish
+voldemort(99); // (compile error) can't infer `T` type parameter
+<span class="boring">}
+</span></code></pre></pre>
+<p>We are forced to replace all usages of <code>impl Trait</code> in function parameters with regular generic types.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">trait Trait1 {}
+</span><span class="boring">impl Trait1 for i32 {}
+</span>fn voldemort&lt;T: Default, U: Trait1&gt;(a: U) {
+    T::default();
+}
+
+// It's callable, yay 😄!
+// But now ugly `_` is required on each call 😖
+voldemort::&lt;bool, _&gt;(99);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Even if all remaining generic parameters can be trivially inferred we have to enumerate them all with <code>_</code>. I recommend never to design such an API that forces users to always write a turbofish <em>with a bunch of <code>_</code> for generic parameters that can be inferred</em>. Unfortunately, there isn't a better universal workaround for this problem.</p>
+<p>There exists <a href="https://rust-lang.github.io/impl-trait-initiative/explainer/apit_turbofish.html">an initiative</a> to fix this by letting us use turbofish syntax with <code>impl Trait</code> parameters being inferred, though I guess it has low priority at the time of this writing 🤔.</p>
+<h3><a class="header" href="#real-world-example" id="real-world-example">Real World Example</a></h3>
+<p>Such a problem occurred for me when writing an extension trait, but I will depict it as a free function here for simplicity. This function maps one collection into the other.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn map_collect&lt;O: FromIterator&lt;T&gt;, I: IntoIterator, T&gt;(
+    iter: I,
+    map: impl FnMut(I::Item) -&gt; T
+) -&gt; O {
+    iter.into_iter().map(map).collect()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Because this function uses <code>impl Trait</code> syntax it's impossible to call it with turbofish. For example, we can't instruct <code>rustc</code> to infer <code>Result&lt;Vec&lt;_&gt;&gt;</code> for the first type parameter that easily.</p>
+<pre><pre class="playground"><code class="language-rust compile_fail">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">fn map_collect&lt;O: FromIterator&lt;T&gt;, I: IntoIterator, T&gt;(
+</span><span class="boring">    iter: I,
+</span><span class="boring">    map: impl FnMut(I::Item) -&gt; T
+</span><span class="boring">) -&gt; O {
+</span><span class="boring">    iter.into_iter().map(map).collect()
+</span><span class="boring">}
+</span><span class="boring">use std::io::Error;
+</span>// Can't use turbofish to specify that the first type param is `Result&lt;Vec&lt;_&gt;&gt;`
+map_collect([false, true], |val| Ok::&lt;bool, Error&gt;(val))?;
+//                                                      ^ cannot infer type
+<span class="boring">Ok::&lt;(), Error&gt;(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>If we replace <code>impl FnMut(T::Item) -&gt; T</code> with the fourth generic parameter we will be able to use turbofish for calling the function, but it will be as ugly as this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">fn map_collect&lt;O: FromIterator&lt;T&gt;, I: IntoIterator, T, F: FnMut(I::Item) -&gt; T&gt;(
+</span><span class="boring">    iter: I,
+</span><span class="boring">    map: F
+</span><span class="boring">) -&gt; O {
+</span><span class="boring">    iter.into_iter().map(map).collect()
+</span><span class="boring">}
+</span><span class="boring">use std::io::Error;
+</span>map_collect::&lt;Result&lt;Vec&lt;_&gt;, Error&gt;, _, _, _&gt;([false, true], |val| Ok(val))?;
+<span class="boring">Ok::&lt;(), Error&gt;(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#conclusions" id="conclusions">Conclusions</a></h1>
+<p>Now you know what the limitations of <code>impl Trait</code> are, and how to define a function, that is impossible to call in Rust without <a href="https://smallcultfollowing.com/babysteps/blog/2018/08/13/never-patterns-exhaustive-matching-and-uninhabited-types-oh-my/">uninhabited types</a>.</p>
+<p>I hope you learned something new today 😉.</p>
+<hr />
+<p><a href="https://www.reddit.com/r/rust/comments/w530jw/how_to_define_a_function_you_cant_invoke/">Post on Reddit</a></p>
+<p><em>2022-07-22</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="programming-language-definition.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="programming-language-definition.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

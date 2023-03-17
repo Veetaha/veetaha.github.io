@@ -172,7 +172,7 @@ Then it will conclude that the parameters of the plus (`+`) operator are known, 
 Let's take another example
 
 ```rust
-(2 + 6) * 9 / 3 > 46 - 1
+(2 + 6) * 9 / 3 > 46
 # ;
 ```
 
